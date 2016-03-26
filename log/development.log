@@ -1,0 +1,127 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to DeviseCreateUsers (20160326112818)
+  [1m[35m (1.1ms)[0m  CREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `employee_id` varchar(255), `first_name` varchar(255), `last_name` varchar(255), `phone_no` varchar(255), `date_of_birth` date, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (292.6ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (452.6ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to DeviseCreateUsers (20160326112818)
+  [1m[35m (259.2ms)[0m  CREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `employee_id` varchar(255), `first_name` varchar(255), `last_name` varchar(255), `phone_no` varchar(255), `date_of_birth` date, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (195.4ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (196.1ms)[0m  CREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) 
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160326112818')
+  [1m[36m (42.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.6ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (1.0ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'busapp_dev'
+  AND fk.table_name = 'users'
+[0m
+  [1m[35m (0.6ms)[0m  SHOW CREATE TABLE `users`
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateRoles (20160326113243)
+  [1m[35m (234.6ms)[0m  CREATE TABLE `roles` (`id` int(11) auto_increment PRIMARY KEY, `role_name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160326113243')
+  [1m[36m (63.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePrivileges (20160326113254)
+  [1m[35m (370.0ms)[0m  CREATE TABLE `privileges` (`id` int(11) auto_increment PRIMARY KEY, `user_id` int(11), `role_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_privileges_on_user_id`  (`user_id`) ,  INDEX `index_privileges_on_role_id`  (`role_id`) ) ENGINE=InnoDB
+  [1m[36m (630.0ms)[0m  [1mALTER TABLE `privileges` ADD CONSTRAINT `fk_rails_fa4d6ee0e7`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (686.5ms)[0m  ALTER TABLE `privileges` ADD CONSTRAINT `fk_rails_629b2aa328`
+FOREIGN KEY (`role_id`)
+  REFERENCES `roles` (`id`)
+
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160326113254')
+  [1m[36m (29.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.5ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.9ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'busapp_dev'
+  AND fk.table_name = 'privileges'
+[0m
+  [1m[35m (0.6ms)[0m  SHOW CREATE TABLE `privileges`
+  [1m[36m (0.8ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'busapp_dev'
+  AND fk.table_name = 'roles'
+[0m
+  [1m[35m (0.5ms)[0m  SHOW CREATE TABLE `roles`
+  [1m[36m (0.8ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'busapp_dev'
+  AND fk.table_name = 'users'
+[0m
+  [1m[35m (0.6ms)[0m  SHOW CREATE TABLE `users`
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT `users`.* FROM `users`
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.9ms)[0m  SELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'mcs152338@iitd.ac.in' LIMIT 1
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO `users` (`email`, `first_name`, `last_name`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('mcs152338@iitd.ac.in', 'Harshit', 'Patel', '$2a$10$dnvmWhrorqKG02aGAZNlAezrShfBbFDSCIiYRlC6gIxYmMCQizWFe', '2016-03-26 11:42:54', '2016-03-26 11:42:54')[0m
+  [1m[35m (38.6ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.8ms)[0m  SELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'mcs152356@iitd.ac.in' LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `users` (`email`, `first_name`, `last_name`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('mcs152356@iitd.ac.in', 'Tanuma', 'Patra', '$2a$10$SKWAI30ErqK1gM4Ij09RuuikR.Hhebx/VBessL3abv6iYNV55/Ecq', '2016-03-26 11:42:54', '2016-03-26 11:42:54')[0m
+  [1m[35m (66.9ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.9ms)[0m  SELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'mcs152554@iitd.ac.in' LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `users` (`email`, `first_name`, `last_name`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('mcs152554@iitd.ac.in', 'Divya', 'Gautam', '$2a$10$WKNJ/KUqIh5dFZyZMKLxoOLZpwWG7rpuiqHP45wuXUdS9WypTXZAS', '2016-03-26 11:42:54', '2016-03-26 11:42:54')[0m
+  [1m[35m (29.4ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.9ms)[0m  SELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'mcs152360@iitd.ac.in' LIMIT 1
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO `users` (`email`, `first_name`, `last_name`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('mcs152360@iitd.ac.in', 'Yamini', 'Aggarwal', '$2a$10$6WVY4MG0LzXU3hZsBiAsrOIjr3l1v/Ce2xPFj/VA1CRbEJ1V4XVZu', '2016-03-26 11:42:54', '2016-03-26 11:42:54')[0m
+  [1m[35m (33.9ms)[0m  COMMIT
+  [1m[36mRole Load (0.9ms)[0m  [1mSELECT `roles`.* FROM `roles`[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO `roles` (`role_name`, `created_at`, `updated_at`) VALUES ('admin', '2016-03-26 11:42:54', '2016-03-26 11:42:54')[0m
+  [1m[35m (33.9ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `roles` (`role_name`, `created_at`, `updated_at`) VALUES ('conductor', '2016-03-26 11:42:54', '2016-03-26 11:42:54')
+  [1m[36m (36.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mPrivilege Load (1.0ms)[0m  SELECT `privileges`.* FROM `privileges`
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT `users`.`id` FROM `users`[0m
+  [1m[35mRole Load (0.7ms)[0m  SELECT `roles`.`id` FROM `roles`
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (1, 1, '2016-03-26 11:42:54', '2016-03-26 11:42:54')
+  [1m[36m (30.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (1, 2, '2016-03-26 11:42:54', '2016-03-26 11:42:54')[0m
+  [1m[35m (61.5ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (31.3ms)[0m  INSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (2, 1, '2016-03-26 11:42:54', '2016-03-26 11:42:54')
+  [1m[36m (33.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (2, 2, '2016-03-26 11:42:54', '2016-03-26 11:42:54')[0m
+  [1m[35m (36.5ms)[0m  COMMIT
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (4, 1, '2016-03-26 11:42:55', '2016-03-26 11:42:55')
+  [1m[36m (36.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  BEGIN
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (4, 2, '2016-03-26 11:42:55', '2016-03-26 11:42:55')[0m
+  [1m[35m (36.1ms)[0m  COMMIT
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (3, 1, '2016-03-26 11:42:55', '2016-03-26 11:42:55')
+  [1m[36m (36.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO `privileges` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES (3, 2, '2016-03-26 11:42:55', '2016-03-26 11:42:55')[0m
+  [1m[35m (36.0ms)[0m  COMMIT
+  [1m[36mPrivilege Load (1.1ms)[0m  [1mSELECT `privileges`.* FROM `privileges`[0m

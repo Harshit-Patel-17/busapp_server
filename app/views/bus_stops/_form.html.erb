@@ -1,0 +1,44 @@
+<%= bootstrap_form_for(@bus_stop) do |f| %>
+  <% if @bus_stop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bus_stop.errors.count, "error") %> prohibited this bus_stop from being saved:</h2>
+
+      <ul>
+      <% @bus_stop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div ng-controller='newBusStop' ng-init='alert()'>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_name">Name</label>
+      <input class="form-control" type="text" name="bus_stop[name]" id="bus_stop_name" />
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_street">Street</label>
+      <input class="form-control" type="text" name="bus_stop[street]" id="bus_stop_street" />
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_district">District</label>
+      <input class="form-control" type="text" name="bus_stop[district]" id="bus_stop_district" />
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_state">State</label>
+      <input class="form-control" type="text" name="bus_stop[state]" id="bus_stop_state" />
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_latitude">Latitude</label>
+      <input class="form-control" type="number" name="bus_stop[latitude]" id="bus_stop_latitude" />
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_longitude">Longitude</label>
+      <input class="form-control" type="number" name="bus_stop[longitude]" id="bus_stop_longitude" />
+    </div>
+    <input type="submit" name="commit" value="Create Bus stop" class="btn btn-default" />
+  </div>
+
+<% end %>
+
+

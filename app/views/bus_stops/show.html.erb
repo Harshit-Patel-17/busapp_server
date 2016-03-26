@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bus_stop.name %>
+</p>
+
+<p>
+  <strong>Street:</strong>
+  <%= @bus_stop.street %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @bus_stop.district %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @bus_stop.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @bus_stop.state %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @bus_stop.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @bus_stop.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_bus_stop_path(@bus_stop) %> |
+<%= link_to 'Back', bus_stops_path %>

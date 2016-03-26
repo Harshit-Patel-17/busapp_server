@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326113254) do
+ActiveRecord::Schema.define(version: 20160326163818) do
+
+  create_table "bus_stops", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "street",     limit: 255
+    t.string   "district",   limit: 255
+    t.string   "state",      limit: 255
+    t.decimal  "latitude",               precision: 10
+    t.decimal  "longitude",              precision: 10
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
 
   create_table "privileges", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

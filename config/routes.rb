@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  namespace 'bus_stops' do
+    get 'state_district_data', action: 'state_district_data', as: 'state_district_data'
+  end
+  resources :bus_stops
+
   devise_scope :user do
     devise_for :users, :controllers => {:registrations => 'users/registrations'}
   end
+
   root to: 'welcome#welcome'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

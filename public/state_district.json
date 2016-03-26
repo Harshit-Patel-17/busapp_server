@@ -1,0 +1,39 @@
+{
+  "Delhi": [
+    "New Delhi",
+    "Central",
+    "North",
+    "North West",
+    "West",
+    "South West",
+    "North",
+    "North East"
+  ],
+  "Gujarat": [
+    "anchmahals",
+    "Vadodara",
+    "Amrela",
+    "Kheda",
+    "Ahmedabad",
+    "Valsad",
+    "Junagadh",
+    "Mehsana",
+    "Banaskantha",
+    "Gandhinagar",
+    "Bharuch",
+    "Dangs",
+    "Jamnagar",
+    "Rajkot",
+    "Surat",
+    "Sabarkantha",
+    "Kutch",
+    "Bhavnagar",
+    "Surendranagar",
+    "Navsari",
+    "Anand",
+    "Narmada",
+    "Patan",
+    "Porbander",
+    "Dahod"
+  ]
+}

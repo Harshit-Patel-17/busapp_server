@@ -22,11 +22,14 @@ end
 
 if Privilege.all.length == 0
   puts 'Seeding privileges...'
-  users = User.select(:id)
-  roles = Role.select(:id)
+  users = User.select(:id, :first_name)
+  admin_role_id = Role.find_by_role_name('admin')[:id]
+  conductor_role_id = Role.find_by_role_name('conductor')[:id]
   users.each do |user|
-    roles.each do |role|
-      Privilege.create!(user_id: user[:id], role_id: role[:id])
+    if(user[:first_name] == 'Harshit')
+      Privilege.create!(user_id: user[:id], role_id: admin_role_id)
+    elsif
+      Privilege.create!(user_id: user[:id], role_id: conductor_role_id)
     end
   end
 end

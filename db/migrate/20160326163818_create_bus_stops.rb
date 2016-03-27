@@ -5,8 +5,8 @@ class CreateBusStops < ActiveRecord::Migration
       t.string :street
       t.string :district
       t.string :state
-      t.decimal :latitude
-      t.decimal :longitude
+      t.decimal :latitude, :precision => 13, :scale => 10
+      t.decimal :longitude, :precision => 13, :scale => 10
 
       t.timestamps null: false
     end

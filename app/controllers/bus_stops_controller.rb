@@ -42,6 +42,7 @@ class BusStopsController < ApplicationController
   # PATCH/PUT /bus_stops/1
   # PATCH/PUT /bus_stops/1.json
   def update
+    print bus_stop_params
     respond_to do |format|
       if @bus_stop.update(bus_stop_params)
         format.html { redirect_to @bus_stop, notice: 'Bus stop was successfully updated.' }
@@ -66,10 +67,10 @@ class BusStopsController < ApplicationController
   # GET /bus_stops/state_district_data.json
   def state_district_data
     data = File.read('public/state_district.json')
-    data_hash = JSON.parse(data)
-    respond_to do |format|
-      format.json { render json: data_hash }
-    end
+    @state_district_hash = JSON.parse(data).symbolize_keys
+    #respond_to do |format|
+    #  format.json { render json: {:data => data_hash} }
+    #end
   end
 
   private

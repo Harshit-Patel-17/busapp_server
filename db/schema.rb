@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 20160326163818) do
     t.string   "street",     limit: 255
     t.string   "district",   limit: 255
     t.string   "state",      limit: 255
-    t.decimal  "latitude",               precision: 10
-    t.decimal  "longitude",              precision: 10
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "latitude",               precision: 13, scale: 10
+    t.decimal  "longitude",              precision: 13, scale: 10
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   create_table "privileges", force: :cascade do |t|

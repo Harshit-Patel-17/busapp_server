@@ -20,4 +20,5 @@
 //= require bootstrap
 //= equire angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
+//= require gmaps/google
 //= require_tree .

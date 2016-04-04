@@ -14,41 +14,46 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <label class="control-label" for="bus_stop_name">Name</label>
-    <input class="form-control" type="text" name="bus_stop[name]" id="bus_stop_name" ng-model="busStop['name']"/>
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_name">Name</label>
+      <input class="form-control" type="text" name="bus_stop[name]" id="bus_stop_name" required ng-model="busStop['name']"/>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_street">Street</label>
+      <input class="form-control" type="text" name="bus_stop[street]" id="bus_stop_street" required ng-model="busStop['street']"/>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_state">State</label>
+      <select class="form-control" name="bus_stop[state]" id="bus_stop_state" required ng-model="busStop['state']" ng-options="state for state in states track by state">
+         <option value="" style="display:none">Select State</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_district">District</label>
+      <select class="form-control" name="bus_stop[district]" id="bus_stop_district" required ng-model="busStop['district']" ng-options="district for district in stateDistrictData[busStop['state']] track by district">
+        <option value="" style="display:none">Select District</option>
+      </select>
+    </div>
+    <div class="form-group"i>
+      <label class="control-label" for="bus_stop_latitude">Latitude</label>
+      <input class="form-control" type="number" step="any" name="bus_stop[latitude]" id="bus_stop_latitude" readonly required ng-model="busStop['latitude']" string-to-number/>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="bus_stop_longitude">Longitude</label>
+      <input class="form-control" type="number" step="any" name="bus_stop[longitude]" id="bus_stop_longitude" readonly required ng-model="busStop['longitude']" string-to-number/>
+    </div>
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-success" ng-click="getLatLng()">Get Latitude-Longitude</button>
+    </div>
+    <div class="col-sm-4">
+    <%= f.submit %>
+    </div>
   </div>
-  <div class="form-group">
-    <label class="control-label" for="bus_stop_street">Street</label>
-    <input class="form-control" type="text" name="bus_stop[street]" id="bus_stop_street" ng-model="busStop['street']"/>
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="bus_stop_district">District</label>
-    <select class="form-control" name="bus_stop[district]" id="bus_stop_district" ng-model="busStop['district']" ng-options="district for district in stateDistrictData[busStop['state']] track by district">
-      <option value="" style="display:none">Select District</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="bus_stop_state">State</label>
-    <select class="form-control" name="bus_stop[state]" id="bus_stop_state" ng-model="busStop['state']" ng-options="state for state in states track by state">
-       <option value="" style="display:none">Select State</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="bus_stop_latitude">Latitude</label>
-    <input class="form-control" type="number" step="any" name="bus_stop[latitude]" id="bus_stop_latitude" ng-model="busStop['latitude']" string-to-number/>
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="bus_stop_longitude">Longitude</label>
-    <input class="form-control" type="number" step="any" name="bus_stop[longitude]" id="bus_stop_longitude" ng-model="busStop['longitude']" string-to-number/>
-  </div>
-  <div class="form-group">
-    <button type="button" class="btn btn-success" ng-click="getLatLng()">Get Latitude-Longitude</button>
-  </div>
-  <%= f.submit %>
-
-  <div style='width:800px;'>
-    <div id="map" style='width:800px; height:400px;'></div>
+  <div class="col-sm-4">
+    <div style='width:800px;'>
+      <div id="map" style='width:800px; height:400px;'></div>
+    </div>
   </div>
 
 <% end %>

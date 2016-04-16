@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :buses
+
   namespace 'bus_stops' do
     get 'state_district_data', action: 'state_district_data', as: 'state_district_data'
     post 'lat_lng', action: 'lat_lng', as: 'lat_lng'

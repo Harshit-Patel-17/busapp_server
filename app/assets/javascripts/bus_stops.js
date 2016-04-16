@@ -1,4 +1,4 @@
-angular.module('busApp', ['ui.bootstrap', 'restangular', 'ngGrid'])
+angular.module('busApp')
 .controller('newBusStop',
 [
   '$scope',

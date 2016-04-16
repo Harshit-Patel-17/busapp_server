@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bus_num: MyString
+  registration_num: MyString
+  status: MyString
+  latitude: 1
+  longitude: 1
+  capacity: 1
+  seat_avail: 1
+  ac_nonac: MyString
+
+two:
+  bus_num: MyString
+  registration_num: MyString
+  status: MyString
+  latitude: 1
+  longitude: 1
+  capacity: 1
+  seat_avail: 1
+  ac_nonac: MyString

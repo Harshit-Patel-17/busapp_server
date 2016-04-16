@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326163818) do
+ActiveRecord::Schema.define(version: 20160411194153) do
 
   create_table "bus_stops", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20160326163818) do
     t.datetime "updated_at",                                       null: false
   end
 
+  create_table "buses", force: :cascade do |t|
+    t.string   "bus_num",          limit: 255
+    t.string   "registration_num", limit: 255
+    t.string   "status",           limit: 255
+    t.integer  "latitude",         limit: 4
+    t.integer  "longitude",        limit: 4
+    t.integer  "capacity",         limit: 4
+    t.integer  "seat_avail",       limit: 4
+    t.string   "ac_nonac",         limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
   create_table "privileges", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "role_id",    limit: 4
@@ -33,6 +46,16 @@ ActiveRecord::Schema.define(version: 20160326163818) do
 
   add_index "privileges", ["role_id"], name: "index_privileges_on_role_id", using: :btree
   add_index "privileges", ["user_id"], name: "index_privileges_on_user_id", using: :btree
+
+  create_table "reaches", force: :cascade do |t|
+    t.integer  "bus_id",      limit: 4
+    t.integer  "bus_stop_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "reaches", ["bus_id"], name: "index_reaches_on_bus_id", using: :btree
+  add_index "reaches", ["bus_stop_id"], name: "index_reaches_on_bus_stop_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "role_name",  limit: 255
@@ -65,4 +88,6 @@ ActiveRecord::Schema.define(version: 20160326163818) do
 
   add_foreign_key "privileges", "roles"
   add_foreign_key "privileges", "users"
+  add_foreign_key "reaches", "bus_stops"
+  add_foreign_key "reaches", "buses"
 end

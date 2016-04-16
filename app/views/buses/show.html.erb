@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bus num:</strong>
+  <%= @bus.bus_num %>
+</p>
+
+<p>
+  <strong>Registration num:</strong>
+  <%= @bus.registration_num %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @bus.status %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @bus.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @bus.longitude %>
+</p>
+
+<p>
+  <strong>Capacity:</strong>
+  <%= @bus.capacity %>
+</p>
+
+<p>
+  <strong>Seat avail:</strong>
+  <%= @bus.seat_avail %>
+</p>
+
+<p>
+  <strong>Ac nonac:</strong>
+  <%= @bus.ac_nonac %>
+</p>
+
+<%= link_to 'Edit', edit_bus_path(@bus) %> |
+<%= link_to 'Back', buses_path %>

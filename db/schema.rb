@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(version: 20160411194153) do
     t.string   "bus_num",          limit: 255
     t.string   "registration_num", limit: 255
     t.string   "status",           limit: 255
-    t.integer  "latitude",         limit: 4
-    t.integer  "longitude",        limit: 4
+    t.decimal  "latitude",                     precision: 13, scale: 10
+    t.decimal  "longitude",                    precision: 13, scale: 10
     t.integer  "capacity",         limit: 4
     t.integer  "seat_avail",       limit: 4
     t.string   "ac_nonac",         limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   create_table "privileges", force: :cascade do |t|

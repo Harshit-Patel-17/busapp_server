@@ -14,11 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require angular
+//= require angular-sanitize
 //= require angular-animate
 //= require angular-resource
 //= require angular-ng-grid-rails
 //= require bootstrap
 //= equire angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
+//= require angular-ui-select
 //= require gmaps/google
 //= require_tree .

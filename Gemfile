@@ -12,6 +12,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'bootstrap_form'
 gem 'geokit-rails'
 gem 'gmaps4rails'
+gem 'angular-ui-select-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

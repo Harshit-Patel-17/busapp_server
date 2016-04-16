@@ -24,6 +24,7 @@ class BusesController < ApplicationController
   # POST /buses
   # POST /buses.json
   def create
+    print params
     @bus = Bus.new(bus_params)
 
     respond_to do |format|

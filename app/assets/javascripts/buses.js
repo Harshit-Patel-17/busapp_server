@@ -8,8 +8,14 @@ angular.module('busApp')
   function($scope, $http, $modal, $rest) {
     $scope.bus = {};
     $scope.busStops = []
-    //handler = Gmaps.build('Google');
+    handler = Gmaps.build('Google');
     markers = null;
+
+    //Default initializations
+    $scope.bus.status = "off";
+    $scope.bus.latitude = 23.384096;
+    $scope.bus.longitude = 77.497747;
+    $scope.bus.seat_avail = 0
     /*
     $scope.initMap = function() {
       handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
@@ -28,6 +34,18 @@ angular.module('busApp')
       }, function() {
         alert("Error in fetching bus stops");
       });
+    };
+
+    $scope.submit = function() {
+      params = {'bus': $scope.bus};
+      $rest.setRequestSuffix('.json');
+      $rest.one('buses').post('', params)
+      .then(function(data) {
+        alert(JSON.stringify(data));
+      }, function() {
+        alert('Error in creating new bus');
+      }
+      );
     };
 
     //$scope.initMap();

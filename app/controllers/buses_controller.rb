@@ -24,11 +24,10 @@ class BusesController < ApplicationController
   # POST /buses
   # POST /buses.json
   def create
-    print params
-    @bus = Bus.new(bus_params)
+    @bus, status = Bus.addNewBus(params)
 
     respond_to do |format|
-      if @bus.save
+      if status == true
         format.html { redirect_to @bus, notice: 'Bus was successfully created.' }
         format.json { render :show, status: :created, location: @bus }
       else
@@ -41,8 +40,9 @@ class BusesController < ApplicationController
   # PATCH/PUT /buses/1
   # PATCH/PUT /buses/1.json
   def update
+    @bus, status = Bus.updateBus(@bus, params)
     respond_to do |format|
-      if @bus.update(bus_params)
+      if status == true
         format.html { redirect_to @bus, notice: 'Bus was successfully updated.' }
         format.json { render :show, status: :ok, location: @bus }
       else
@@ -66,6 +66,7 @@ class BusesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_bus
       @bus = Bus.find(params[:id])
+      @route = @bus.reaches.collect{|reach| reach.bus_stop.attributes.merge(reach.attributes.extract!("stop_num"))}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

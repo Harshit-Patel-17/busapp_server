@@ -1,6 +1,10 @@
-<h1>Editing Bus</h1>
+<div class="container">
+  <h1>Editing Bus</h1>
 
-<%= render 'form' %>
+  <div ng-controller="editBus">
+    <%= render 'form' %>
+  </div>
 
+</div>
 <%= link_to 'Show', @bus %> |
 <%= link_to 'Back', buses_path %>

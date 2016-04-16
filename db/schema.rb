@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160411194153) do
   create_table "reaches", force: :cascade do |t|
     t.integer  "bus_id",      limit: 4
     t.integer  "bus_stop_id", limit: 4
+    t.integer  "stop_num",    limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end

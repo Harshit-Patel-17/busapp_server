@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
+  namespace 'buses' do
+    get 'user_id/:user_id', action: 'show_by_user_id', as: 'show_by_user_id'
+    get ':id/latlng', action: 'latlng', as: 'latlng'
+  end
   resources :buses
 
   namespace 'bus_stops' do
+    get 'closest', action: 'closest', as: 'closest'
     get 'state_district_data', action: 'state_district_data', as: 'state_district_data'
     post 'lat_lng', action: 'lat_lng', as: 'lat_lng'
   end
   resources :bus_stops
 
   devise_scope :user do
-    devise_for :users, :controllers => {:registrations => 'users/registrations'}
+    get 'users/conductors', to: 'users/registrations#conductors'
+    devise_for :users, :controllers => {:registrations => 'users/registrations', :sessions => 'users/sessions'}
   end
 
   root to: 'welcome#welcome'

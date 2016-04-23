@@ -1,9 +1,11 @@
 class Bus < ActiveRecord::Base
   has_many :reaches
   has_many :bus_stops, through: :reaches
+  belongs_to :user
 
   def self.addNewBus(params)
-    bus_params = params["bus"].except("route").symbolize_keys
+    bus_params = params["bus"].except("route", "conductor").symbolize_keys
+    bus_params[:user_id] = params["bus"]["conductor"]["id"]
     route_params = params["bus"]["route"]
     bus = Bus.new(bus_params)
     if(!bus.save)
@@ -17,11 +19,15 @@ class Bus < ActiveRecord::Base
   end
 
   def self.updateBus(bus, params)
-    bus_params = params["bus"].except("route").symbolize_keys
-    route_params = params["bus"]["route"]
+    bus_params = params["bus"].except("route", "conductor").symbolize_keys
+    bus_params[:user_id] = params["bus"]["conductor"]["id"] if params["bus"].has_key? "conductor"
     if(!bus.update(bus_params))
       return bus, false
     end
+    if(!params["bus"].has_key? "route")
+      return bus, true
+    end
+    route_params = params["bus"]["route"] if params["bus"].has_key? "route"
     bus.reaches.delete_all
     if(!updateRoute(bus, route_params))
       bus.delete

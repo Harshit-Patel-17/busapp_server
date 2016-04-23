@@ -27,6 +27,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  # GET /users/conductors.json
+  def conductors
+    @conductors = Role.find_by_role_name("conductor").users
+  end
+
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to

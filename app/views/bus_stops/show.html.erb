@@ -1,34 +1,44 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @bus_stop.name %>
-</p>
+<div class="container">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+	<div class="panel panel-default">
+		<div class="panel-heading"><strong>Bus Stop Details</strong></div>
+		<div class="panel-body">
+			  <label>Name:</label>
+			<p>
+			  <%= @bus_stop.name %>
+			</p>
 
-<p>
-  <strong>Street:</strong>
-  <%= @bus_stop.street %>
-</p>
+			  <label>Street:</label>
+			<p>
+			  <%= @bus_stop.street %>
+			</p>
 
-<p>
-  <strong>District:</strong>
-  <%= @bus_stop.district %>
-</p>
+			  <label>District:</label>
+			<p>
+			  <%= @bus_stop.district %>
+			</p>
 
-<p>
-  <strong>State:</strong>
-  <%= @bus_stop.state %>
-</p>
+			  <label>State:</label>
+			<p>
+			  <%= @bus_stop.state %>
+			</p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @bus_stop.latitude %>
-</p>
+			  <label>Latitude:</label>
+			<p>
+			  <%= @bus_stop.latitude %>
+			</p>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @bus_stop.longitude %>
-</p>
-
-<%= link_to 'Edit', edit_bus_stop_path(@bus_stop) %> |
+			  <label>Longitude:</label>
+			<p>
+			  <%= @bus_stop.longitude %>
+			</p>
+		</div>
+	</div>
+	</div>
+	<div class="col-sm-3"></div>
+<%= link_to 'Edit', edit_bus_stop_path(@bus_stop), method: :get %> |
 <%= link_to 'Back', bus_stops_path %>
+<div>

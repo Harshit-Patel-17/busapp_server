@@ -1,12 +1,22 @@
 class BusStopsController < ApplicationController
   before_action :set_bus_stop, only: [:show, :edit, :update, :destroy]
 
+  acts_as_token_authentication_handler_for User, :only => [:new, :edit, :create, :update, :destroy]
+
   require 'json'
 
   # GET /bus_stops
   # GET /bus_stops.json
   def index
     @bus_stops = BusStop.all
+    if params.has_key? :state
+      @bus_stops = @bus_stops.where(:state => params[:state]).order(:district)
+    end
+  end
+
+  # GET /bus_stops/closest
+  def closest
+    @bus_stop = BusStop.closest(:origin => [params[:lat], params[:lng]])[0]
   end
 
   # GET /bus_stops/1

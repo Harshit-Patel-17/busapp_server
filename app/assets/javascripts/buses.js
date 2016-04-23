@@ -4,10 +4,12 @@ angular.module('busApp')
   '$scope',
   '$http',
   '$uibModal',
+  '$window',
   'Restangular',
-  function($scope, $http, $modal, $rest) {
+  function($scope, $http, $modal, $window, $rest) {
     $scope.bus = {};
-    $scope.busStops = []
+    $scope.busStops = [];
+    $scope.conductors = [];
     handler = Gmaps.build('Google');
     markers = null;
 
@@ -36,6 +38,16 @@ angular.module('busApp')
       });
     };
 
+    $scope.getConductors = function() {
+      $rest.setRequestSuffix('.json');
+      $rest.all("users/conductors").get("")
+      .then(function(data) {
+        $scope.conductors = data["conductors"];
+      }, function() {
+        alert("Error in fetching conductors");
+      });
+    };
+
     $scope.validateForm = function() {
       formAngularElem = angular.element(".new_bus")[0];
       submitAngularElem = angular.element(".submit")[0];
@@ -59,7 +71,7 @@ angular.module('busApp')
       $rest.setRequestSuffix('.json');
       $rest.one('buses').post('', params)
       .then(function(data) {
-        alert(JSON.stringify(data));
+        $window.location.href = "/buses/" + data["bus"]["id"];
       }, function() {
         alert('Error in creating new bus');
       }
@@ -88,6 +100,7 @@ angular.module('busApp')
 
     $scope.initMap();
     $scope.getBusStops();
+    $scope.getConductors();
 
     $scope.$watch("bus.route", function() {
       $scope.showBusStopsOnMap();
@@ -150,6 +163,16 @@ angular.module('busApp')
       });
     };
 
+    $scope.getConductors = function() {
+      $rest.setRequestSuffix('.json');
+      $rest.all("users/conductors").get("")
+      .then(function(data) {
+        $scope.conductors = data["conductors"];
+      }, function() {
+        alert("Error in fetching conductors");
+      });
+    };
+
     $scope.validateForm = function() {
       formAngularElem = angular.element(".edit_bus")[0];
       submitAngularElem = angular.element(".submit")[0];
@@ -203,6 +226,7 @@ angular.module('busApp')
     $scope.initMap();
     $scope.getBus();
     $scope.getBusStops();
+    $scope.getConductors();
   }
 ]);
 

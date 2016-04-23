@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<div class="container">
 <h1>Listing Buses</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Bus num</th>
@@ -11,7 +12,6 @@
       <th>Latitude</th>
       <th>Longitude</th>
       <th>Capacity</th>
-      <th>Seat avail</th>
       <th>Ac nonac</th>
       <th colspan="3"></th>
     </tr>
@@ -26,16 +26,14 @@
         <td><%= bus.latitude %></td>
         <td><%= bus.longitude %></td>
         <td><%= bus.capacity %></td>
-        <td><%= bus.seat_avail %></td>
         <td><%= bus.ac_nonac %></td>
-        <td><%= link_to 'Show', bus %></td>
-        <td><%= link_to 'Edit', edit_bus_path(bus) %></td>
+        <td><%= link_to 'Show', bus, method: :get %></td>
+        <td><%= link_to 'Edit', edit_bus_path(bus), method: :get %></td>
         <td><%= link_to 'Destroy', bus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
-<br>
 
-<%= link_to 'New Bus', new_bus_path %>

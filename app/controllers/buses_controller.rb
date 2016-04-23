@@ -1,15 +1,42 @@
 class BusesController < ApplicationController
-  before_action :set_bus, only: [:show, :edit, :update, :destroy]
+  before_action :set_bus, only: [:show, :latlng, :edit, :update, :destroy]
+
+  acts_as_token_authentication_handler_for User, :only => [:new, :edit, :create, :update, :destroy]
 
   # GET /buses
   # GET /buses.json
   def index
-    @buses = Bus.all
+    @buses = Bus.all.compact
+    if params.has_key? :src and params.has_key? :dst
+      src_id = params[:src].to_i
+      dst_id = params[:dst].to_i
+      buses_to_delete = []
+      @buses.each do |bus|
+        bus_stop_ids = bus.reaches.pluck(:bus_stop_id)
+        buses_to_delete.push(bus) if !(bus_stop_ids.include? src_id and bus_stop_ids.include? dst_id)
+      end
+      buses_to_delete.each do |bus|
+        @buses.delete(bus)
+      end
+    end
   end
 
   # GET /buses/1
   # GET /buses/1.json
   def show
+  end
+
+  #GET /buses/1/latlng.json
+  def latlng
+  end
+
+  # GET /buses/user_id/1.json
+  def show_by_user_id
+    begin
+      set_bus_by_user_id
+    rescue
+      render json: { error: "Bus not found" }
+    end
   end
 
   # GET /buses/new
@@ -67,10 +94,17 @@ class BusesController < ApplicationController
     def set_bus
       @bus = Bus.find(params[:id])
       @route = @bus.reaches.collect{|reach| reach.bus_stop.attributes.merge(reach.attributes.extract!("stop_num"))}
+      @conductor = @bus.user.attributes.extract!("id", "first_name", "last_name")
+    end
+
+    def set_bus_by_user_id
+      @bus = Bus.find_by_user_id(params[:user_id])
+      @route = @bus.reaches.collect{|reach| reach.bus_stop.attributes.merge(reach.attributes.extract!("stop_num"))}
+      @conductor = @bus.user.attributes.extract!("id", "first_name", "last_name")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bus_params
-      params.require(:bus).permit(:bus_num, :registration_num, :status, :latitude, :longitude, :capacity, :seat_avail, :ac_nonac)
+      params.require(:bus).permit(:bus_num, :registration_num, :status, :latitude, :longitude, :capacity, :seat_avail, :ac_nonac, :user_id, :bus_stop_id)
     end
 end

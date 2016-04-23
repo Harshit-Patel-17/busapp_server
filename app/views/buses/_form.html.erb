@@ -58,6 +58,15 @@
       </select>
     </div>-->
     <div class="form-group">
+      <label class="control-label" for="bus_conductor">Conductor</label>
+      <ui-select name="bus[conductor]" id="bus_conductor" ng-model="bus.conductor" theme="bootstrap" close-on-select="true" title="Choose conductor">
+        <ui-select-match class="ui-select-match" placeholder="Select or search a conductor in the list...">{{$select.selected.first_name + ' ' + $select.selected.last_name}}</ui-select-match>
+        <ui-select-choices class="ui-select-choices" repeat="conductor in conductors | filter: $select.search">
+          <div ng-bind-html="conductor.first_name + ' ' + conductor.last_name | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+    <div class="form-group">
       <label class="control-label" for="bus_bus_stops">Bus Stops</label>
       <ui-select multiple name="bus[bus_stops]" id="bus_bus_stops" ng-model="bus.route" theme="bootstrap" close-on-select="false" title="Choose bus stop">
         <ui-select-match class="ui-select-match" placeholder="Select or search a bus stop in the list...">{{$item.name}}</ui-select-match>

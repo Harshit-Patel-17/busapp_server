@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<div class="container">
 <h1>Listing Bus Stops</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
       <th>Street</th>
       <th>District</th>
-      <th>City</th>
       <th>State</th>
       <th>Latitude</th>
       <th>Longitude</th>
@@ -25,14 +25,12 @@
         <td><%= bus_stop.state %></td>
         <td><%= bus_stop.latitude %></td>
         <td><%= bus_stop.longitude %></td>
-        <td><%= link_to 'Show', bus_stop %></td>
-        <td><%= link_to 'Edit', edit_bus_stop_path(bus_stop) %></td>
+        <td><%= link_to 'Show', bus_stop, method: :get %></td>
+        <td><%= link_to 'Edit', edit_bus_stop_path(bus_stop), method: :get %></td>
         <td><%= link_to 'Destroy', bus_stop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
-<br>
-
-<%= link_to 'New Bus stop', new_bus_stop_path %>

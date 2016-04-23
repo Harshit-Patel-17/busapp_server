@@ -8,6 +8,10 @@
 </head>
 <body ng-app='busApp'>
 
+<% if can? :manage, :app %>
+<%= render "layouts/header" %>
+<% end %>
+
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>

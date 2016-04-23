@@ -1,44 +1,56 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Bus num:</strong>
-  <%= @bus.bus_num %>
-</p>
+<div class="container">
+      	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+	<div class="panel panel-default">
+		<div class="panel-heading"><strong>Bus Details</strong></div>
+		<div class="panel-body">
+			
+			<label>Bus num:</label>
+			<p>
+			  <%= @bus.bus_num %>
+			</p>
 
-<p>
-  <strong>Registration num:</strong>
-  <%= @bus.registration_num %>
-</p>
+			  <label>Registration num:</label>
+			<p>
+			  <%= @bus.registration_num %>
+			</p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @bus.status %>
-</p>
+			  <label>Status:</label>
+			<p>
+			  <%= @bus.status %>
+			</p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @bus.latitude %>
-</p>
+			  <label>Latitude:</label>
+			<p>
+			  <%= @bus.latitude %>
+			</p>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @bus.longitude %>
-</p>
+			  <label>Longitude:</label>
+			<p>
+			  <%= @bus.longitude %>
+			</p>
 
-<p>
-  <strong>Capacity:</strong>
-  <%= @bus.capacity %>
-</p>
+			  <label>Capacity:</label>
+			<p>
+			  <%= @bus.capacity %>
+			</p>
 
-<p>
-  <strong>Seat avail:</strong>
-  <%= @bus.seat_avail %>
-</p>
+			  <label>Seat avail:</label>
+			<p>
+			  <%= @bus.seat_avail %>
+			</p>
 
-<p>
-  <strong>Ac nonac:</strong>
-  <%= @bus.ac_nonac %>
-</p>
+			  <label>Ac nonac:</label>
+			<p>
+			  <%= @bus.ac_nonac %>
+			</p>
+		</div>
+	</div>
+	</div>
+	<div class="col-sm-3"></div>
 
-<%= link_to 'Edit', edit_bus_path(@bus) %> |
+<%= link_to 'Edit', edit_bus_path(@bus), method: :get %> |
 <%= link_to 'Back', buses_path %>
+</div>

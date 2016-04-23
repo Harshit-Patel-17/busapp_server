@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411194153) do
+ActiveRecord::Schema.define(version: 20160420141852) do
 
   create_table "bus_stops", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -33,9 +33,14 @@ ActiveRecord::Schema.define(version: 20160411194153) do
     t.integer  "capacity",         limit: 4
     t.integer  "seat_avail",       limit: 4
     t.string   "ac_nonac",         limit: 255
+    t.integer  "user_id",          limit: 4
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
+    t.integer  "bus_stop_id",      limit: 4
   end
+
+  add_index "buses", ["bus_stop_id"], name: "index_buses_on_bus_stop_id", using: :btree
+  add_index "buses", ["user_id"], name: "index_buses_on_user_id", using: :btree
 
   create_table "privileges", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -82,11 +87,15 @@ ActiveRecord::Schema.define(version: 20160411194153) do
     t.date     "date_of_birth"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "authentication_token",   limit: 255
   end
 
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "buses", "bus_stops"
+  add_foreign_key "buses", "users"
   add_foreign_key "privileges", "roles"
   add_foreign_key "privileges", "users"
   add_foreign_key "reaches", "bus_stops"

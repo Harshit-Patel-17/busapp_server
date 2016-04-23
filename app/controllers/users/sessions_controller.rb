@@ -11,6 +11,15 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
+    respond_to do |format|
+      format.html {
+        if(current_user.role == "conductor")
+          sign_out current_user
+          redirect_to new_user_session_path, alert: "Conductor cannot access this portal"
+        end
+      }
+      format.json {}
+    end
   end
 
   # DELETE /resource/sign_out

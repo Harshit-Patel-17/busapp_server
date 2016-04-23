@@ -6,14 +6,24 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app='busApp'>
+<body ng-app='busApp' style="padding-top: 60px">
 
-<% if can? :manage, :app %>
 <%= render "layouts/header" %>
+
+<% if notice %>	
+<div class="alert alert-success">
+	<a href="#" class="close" data-dismiss="alert">&times;</a>
+	<strong>Note!</strong> <%= notice %>	
+</div>
 <% end %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if alert %>	
+<div class="alert alert-warning">
+	<a href="#" class="close" data-dismiss="alert">&times;</a>
+	<strong>Error!</strong> <%= alert %>	
+</div>
+<% end %>
+
 <%= yield %>
 
 </body>

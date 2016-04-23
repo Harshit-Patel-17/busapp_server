@@ -10,4 +10,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          :token_authenticatable
+
+  def self.create_new params
+    user = User.new
+    user.first_name = params[:first_name]
+    user.last_name = params[:last_name]
+    user.email = params[:email]
+    user.password = params[:password]
+    user.save
+    privilege = Privilege.new
+    privilege.user_id = user.id
+    privilege.role_id = Role.find_by_role_name(params[:role]).id
+    privilege.save
+  end
 end

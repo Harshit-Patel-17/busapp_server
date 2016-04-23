@@ -9,7 +9,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    User.create_new params[:user]
+    redirect_to new_user_session_path
   end
 
   # GET /resource/edit

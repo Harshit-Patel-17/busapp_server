@@ -13,7 +13,7 @@ class BusesController < ApplicationController
       buses_to_delete = []
       @buses.each do |bus|
         bus_stop_ids = bus.reaches.pluck(:bus_stop_id)
-        buses_to_delete.push(bus) if !(bus_stop_ids.include? src_id and bus_stop_ids.include? dst_id)
+        buses_to_delete.push(bus) if !(bus_stop_ids.include? src_id and bus_stop_ids.include? dst_id) or bus[:status] == "off"
       end
       buses_to_delete.each do |bus|
         @buses.delete(bus)

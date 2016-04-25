@@ -1,6 +1,8 @@
 class BusStop < ActiveRecord::Base
-  has_many :reaches
+  has_many :reaches, :dependent => :delete_all
   has_many :buses, through: :reaches
+
+  validates :name, uniqueness: true 
 
   acts_as_mappable :default_units => :kms,
                    :lat_column_name => :latitude,

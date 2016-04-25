@@ -41,7 +41,7 @@
     </div>-->
     <div class="form-group">
       <label class="control-label" for="bus_capacity">Capacity</label>
-      <input class="form-control" type="number" name="bus[capacity]" id="bus_capacity" required ng-model="bus.capacity"/>
+      <input class="form-control" type="number" min="0" name="bus[capacity]" id="bus_capacity" required ng-model="bus.capacity"/>
     </div>
     <div class="form-group">
       <label class="control-label" for="bus_ac_nonac">AC/Non-AC</label>
@@ -76,7 +76,7 @@
         </ui-select-choices>
       </ui-select> 
     </div>
-    <button type="button" class="btn btn-success" ng-click="submit()">Edit Bus</button>
+    <button type="button" class="btn btn-success" ng-click="submit()">Submit</button>
     <button type="submit" class="submit" hidden>Submit</button>
   </div>
   <div class="col-sm-4">

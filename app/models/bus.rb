@@ -1,7 +1,11 @@
 class Bus < ActiveRecord::Base
-  has_many :reaches
+  has_many :reaches, :dependent => :delete_all
   has_many :bus_stops, through: :reaches
   belongs_to :user
+
+  validates :bus_num, uniqueness: true
+  validates :registration_num, uniqueness: true
+  validates :user_id, uniqueness: true  
 
   def self.addNewBus(params)
     bus_params = params["bus"].except("route", "conductor").symbolize_keys

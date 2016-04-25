@@ -9,8 +9,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    User.create_new params[:user]
-    redirect_to new_user_session_path
+    if(params[:user][:password] != params[:user][:password_confirmation])
+      redirect_to new_user_registration_path, :alert => "Password and confirm password must match!"
+    elsif(params[:user][:password].length < 8)
+      redirect_to new_user_registration_path, :alert => "Password length must be at least 8 characters!"
+    else
+      User.create_new params[:user]
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /resource/edit
